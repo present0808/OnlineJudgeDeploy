@@ -20,7 +20,7 @@ services:
       - POSTGRES_PASSWORD=onlinejudge
 
   judge-server:
-    image: registry.cn-hangzhou.aliyuncs.com/onlinejudge/judge_server
+    image: siwooo/judge_server:latest
     container_name: judge-server
     restart: always
     read_only: true
@@ -42,9 +42,11 @@ services:
       - BACKEND_URL=http://oj-backend:8000/api/judge_server_heartbeat/
       - TOKEN=CHANGE_THIS
       # - judger_debug=1
+    ports:
+      - "0.0.0.0:12358:8080"
   
   oj-backend:
-    image: registry.cn-hangzhou.aliyuncs.com/onlinejudge/oj_backend
+    image: siwooo/oj_backend:latest
     container_name: oj-backend
     restart: always
     depends_on:
